@@ -1,0 +1,15 @@
+.signun{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+}
+.goSignUp{
+    text-decoration: none;
+    
+}
