@@ -1,5 +1,5 @@
 import { Modal } from "bootstrap";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {  json, useNavigate } from "react-router";
@@ -8,35 +8,37 @@ import axios, { AxiosHeaders } from "axios";
 function Signin({getUsers}) {
   
   const { handleSubmit, register, formState:{errors} } = useForm();
+  const [success,setSuccess] =useState(false)
   const Navigate=useNavigate()
   const handerGoToSignup =()=>{
     Navigate("/signup")
   }
-  const handerclick =(data)=>{
+  const handerclick = async (data)=>{
 console.log(data);
 
 
-axios.post('http://localhost:3001/login',data)
+await axios.post('http://localhost:3001/login',data)
 .then(response => {
   console.log(response.data)
-    
-    localStorage.setItem('token',response.data)
-    
-    axios.get('http://localhost:3001/users',{headers:{Authorization: `Bearer ${response.data}`
+    if(response.data)
+    {
+      localStorage.setItem('token',response.data)
+      setSuccess(true)
+      Navigate("")
+    }
 
-}})
-    .then(response=>{
-      getUsers(response.data)
-      Navigate("/users")
-    })
-    .catch(error=>{
-      console.error(error);
-    })
 })
 .catch(error => {
   console.error(error);
 });
+
+
   }
+  useEffect(() => {
+    if (!success) return;
+    setSuccess(false);
+    Navigate("/");
+  }, [success]);
   return (
     <div className="signun">
   

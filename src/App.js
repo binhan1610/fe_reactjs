@@ -3,20 +3,24 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Signup from './components/Signup'
 import Signin from './components/Signin'
 import Users from './components/users'
+import Home from './components/Home'
+import PrivateRoute from "./components/PrivateRoute";
+import Header from './components/Header'
 function App() {
-  const [users,setUsers]=useState()
-  const getUsers=(data)=>{
-     setUsers(data)
-  }
+
   return (
     <div>
-      <BrowserRouter>
+    <BrowserRouter>
+    <Header/>
       <Routes>
-        <Route path='/signup' element={<Signup/>}/>
-        <Route path='*' element={<Signin getUsers={getUsers}/>}/>
-        <Route path='/users' element={<Users users={users}/>}/>
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+        <Route path="/Signin" element={<Signin />} />
+        <Route path="/Signup" element={<Signup />} />
+        <Route path="*" element={<>Not Found</>} />
       </Routes>
-      </BrowserRouter>
+    </BrowserRouter>
     </div>
   )
 }

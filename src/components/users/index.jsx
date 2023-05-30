@@ -7,12 +7,14 @@ function Users(users) {
       <table>
         <thead>
           <tr>
+            <td>id</td>
             <td>tài khoản</td>
           </tr>
         </thead>
         <tbody>
           {users.users.map((el) => (
             <tr key={el._id}>
+              <td>{el._id}</td>
               <td>{el.username}</td>
             </tr>
           ))}

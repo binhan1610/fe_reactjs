@@ -9,7 +9,7 @@ function Signup() {
   const { handleSubmit, register, formState:{errors} } = useForm();
   const Navigate=useNavigate()
   const handerGoToSignIn =()=>{
-    Navigate("/")
+    Navigate("/signin")
   }
   const handerclick =(data)=>{
 console.log(data);
